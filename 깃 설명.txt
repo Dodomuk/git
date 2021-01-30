@@ -1,0 +1,74 @@
+사용자 A,B가 작성한 파일 입니다.
+
+git bash 설치
+1. 계정 정보 등록
+   git config --global user.name '사용자이름'
+   git config --global user.email '사용자이메일'
+    git checkout -b main : main브랜치를 생성하고 해당 브랜치로 이동
+   
+2. 사용할 폴더를 git이 관리하는 폴더로 지정하기   
+   2-1. 해당 경로로 이동  /c/CODE/GIT/userA/git_study
+   2-2. 명령어 작성 : git init
+   2-3. git status로 상태 확인
+
+3.  파일 생성하고 add, commit 해보기
+   3-1. study.txt 파일 생성하고 1번, 2번 내용 작성
+   3-2. git status로 상태확인 (commit할 것은 없지만 추적중이지 않은 파일이 있다.)
+   3-3. git add study.txt 
+   3-4. git status로 상태확인 (변화가 commit 되어야 합니다.)
+   3-5. git commit -m '[A]처음으로 commit 해보았습니다.'
+   3-6. git status로 상태확인
+   
+4. git log 확인
+   4-1. git log 
+   4-2. git log --oneline
+   4-3. git log --graph
+   4-4. git log --graph --oneline
+   4-5. study.txt에 3,4 내용 작성하고 commit git commit -m '[B] 작성된 파일을 수정하고 다시 commit 해보았습니다.'
+   
+5. git reset
+   5-1. study.txt에 'reset될 문장입니다.' 작성
+   5-2. commit -am '[C] reset될 문장을 작성하고 commit'  // am : add + message
+   5-3. git log --oneline으로 log확인
+   5-4. git reset --soft <되돌릴 commit> : 내역을 되돌리고 commit만 취소함
+       git reset --mixed <되돌릴 commit> : 내역을 되돌리고 staging도 취소함
+       git reset --hard <되돌릴 commit> : 내역을 되돌리고 파일을 완전히 되돌림
+            --hard로 되돌릴 경우 다시 reset을 취소하기 위해 commit 이력을 불러오는 reflog를 사용해 commit 아이디를 찾아야 한다.
+       git revert <되돌릴 commit> : 파일을 해당 commit 상태로 되돌리고, 새로운 commit 내역을 추가
+
+6. git push
+   6-1. git remote add origin <github repository 주소>
+   6-2. 원격저장소의 ignore파일과 readme 파일 가져오기 
+       unb
+   6-3. git push --set-upstream origin main
+
+7. git 충돌내보기
+   7-1. userB 폴더 생성
+   7-2. 새로운 git bash를 열어 git clone <github repository 주소> / git init 진행
+   7-3. study.txt 첫 줄에 학생이름 추가하고 commit
+   7-4. userA의 git bash 에서 학생이름 추가하고 commit 시도 => 충돌 확인
+   7-5. pull 받아서 충돌 해결하기 auto merge 확인
+   7-6. 사용자 A의 첫줄 수정 / 사용자 B의 첫 줄 수정하고 B,A순으로 push
+   7-7. 두 사용자가 모두 첫줄을 수정하였을 경우 auto merge 불가능
+   7-8. 사용자 A의 study.txt 파일에서 conflict 내용 확인
+   7-9. merge 할 내용을 선택하고 commit
+   
+8. branch 
+   8-1. userA dev branch 생성
+         git checkout -b dev : dev 브랜치를 생성하고 전환
+   8-2. userA login.txt 파일 생성
+   8-3. userB dev branch 생성
+   8-4. userB board.txt 파일 생성
+   8-5. userA push
+   8-6. userB push
+   8-7. userA pull
+   8-8. userB pull
+   8-9. 폴더에 userA와 userB가 만든 login과 board 확인
+   8-10. userA, userB main 브랜치로 전환
+   8-11. login과 board가 폴더에서 삭제되는 것 확인
+   8-12. main에서 dev를 merge 해보기 
+    git checkout main
+    git merge dev
+
+
+remote origin 변경하기 : git remote set-url origi <새 url>
